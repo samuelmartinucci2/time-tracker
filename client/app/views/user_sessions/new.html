@@ -1,0 +1,29 @@
+<form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email"
+           name="email"
+           id="email"
+           ng-model="loginForm.email"
+           required="required"
+           class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password"
+           name="password"
+           id="password"
+           ng-model="loginForm.password"
+           required="required"
+           class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
+</form>
+</br>
+<p><a ng-click="authenticate('twitter', {params: oAuthForm})">Signin with a Twitter Account</a></p>
+<p><a ng-click="authenticate('facebook', {params: oAuthForm})">Signin with a Facebook Account</a></p>
+<p><a ng-click="authenticate('linkedin', {params: oAuthForm})">Signin with a Linkedin Account</a></p>
+<p><a ng-click="authenticate('google', {params: oAuthForm})">Signin with a Google Account</a></p>
+
