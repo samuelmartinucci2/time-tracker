@@ -23,7 +23,7 @@ var app = angular
   ]);
 
 app
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -49,8 +49,8 @@ app
       .otherwise({
         redirectTo: '/'
       });
-  })
-  .config(function($authProvider) {
+  }])
+  .config(['$authProvider', function($authProvider) {
     $authProvider.configure({
       confirmationSuccessUrl:  window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port: ''),
       authProviderPaths: {
@@ -60,7 +60,7 @@ app
         google: '/auth/google'
       }
     })
-  });
+  }]);
 
 
 app.run(['$rootScope', '$location', '$modal', function($rootScope, $location, $modal) {

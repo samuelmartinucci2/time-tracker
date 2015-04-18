@@ -8,7 +8,7 @@
  * Controller of the timeTrackerApp
  */
 angular.module('timeTrackerApp.controllers', ['timeTrackerApp.services'])
-  .controller('MainCtrl', function ($scope, TimeRecord) {
+  .controller('MainCtrl', ['$scope', 'TimeRecord', function ($scope, TimeRecord) {
     $scope.selectRecord = function(record) {
       $scope.selectedRecord = angular.copy(record);
     };
@@ -56,4 +56,4 @@ angular.module('timeTrackerApp.controllers', ['timeTrackerApp.services'])
         $scope.current_time_record = null;
       });
     }
-  });
+  }]);
