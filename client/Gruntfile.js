@@ -74,13 +74,13 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '0.0.0.0'
+        // Change this to 'ancient-depths-3068.herokuapp.com' to access the server from outside.
+        hostname: 'ancient-depths-3068.herokuapp.com'
       },
       proxies: [
         {
           context: '/api',
-          host: '0.0.0.0',
+          host: 'ancient-depths-3068.herokuapp.com',
           port: 3000
         }
       ],
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
     },
     open: {
       server: {
-        url: 'http://0.0.0.0:<%= connect.options.port %>'
+        url: 'http://ancient-depths-3068.herokuapp.com:<%= connect.options.port %>'
       }
     },
     clean: {
