@@ -1,3 +1,119 @@
-<ul ng-repeat="record in timeRecords">
-  <li>{{record.start_time}}</li>
-</ul>
+<div class="row text-center">
+  <div class="col-md-5">
+    <p class="input-group">
+      <input id="filter" type="text" class="form-control" ng-model="filter_time" is-open="opened" close-text="Close"
+             datepicker-popup="dd-MMMM-yyyy" ng-change="filterChange"/>
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open($event)"><i
+          class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+  </div>
+</div>
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Start</th>
+    <th>End</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody ng-repeat="record in timeRecords" ng-click="selectRecord(record)">
+  <tr>
+    <td>{{record.start_time | date : 'H:mm'}}</td>
+    <td>{{record.end_time | date : 'H:mm'}}</td>
+    <td>
+      <span class="glyphicon glyphicon-blackboard" style="font-size: 1.8em; cursor: pointer" aria-hidden="true"
+            data-toggle="modal" data-target="#descModal"></span>
+    </td>
+    <td>
+      <span class="glyphicon glyphicon-pencil" style="font-size: 1.8em; cursor: pointer" aria-hidden="true"
+            data-toggle="modal" data-target="#recordModal"></span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<button ng-disabled="current_time_record.id" class="btn btn-primary" ng-click="checkin()">Check In!</button>
+<button ng-disabled="!current_time_record.id" class="btn btn-primary" ng-click="checkout()">Check Out!</button>
+
+<div class="modal fade bs-example-modal-lg" id="descModal" tabindex="-1" role="dialog" aria-labelledby="descModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form class="form" role="form" ng-submit="updateRecord(false)">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="form-group">
+              <label for="description" class="label-control">Description:</label>
+              <textarea id="description" class="form-control" ng-model="selectedRecord.description"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade bs-example-modal-lg" id="recordModal" tabindex="-1" role="dialog"
+     aria-labelledby="recordModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="recordModalLabel">Update Time Record Data</h4>
+      </div>
+      <form class="form" role="form" ng-submit="updateRecord(true)">
+        <div class="modal-body">
+          <div class="alert alert-danger" role="alert" ng-show="errors">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{errors}}
+          </div>
+
+          <div class="container-fluid">
+            <div class="row">
+              <label for="start_time" class="col-md-2 control-label">Begin:</label>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <datepicker style="display:inline-block" id="start_time" ng-model="selectedRecord.start_time"
+                            show-weeks="true" class="well well-sm"></datepicker>
+              </div>
+              <div class="col-md-2">
+                <timepicker show-meridian="false" minute-step="1"
+                            data-ng-model="selectedRecord.start_time"></timepicker>
+              </div>
+            </div>
+
+            <div class="row">
+              <label for="end_time" class="col-md-2 control-label">Begin:</label>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <datepicker style="display:inline-block" id="end_time" ng-model="selectedRecord.end_time"
+                            show-weeks="true" class="well well-sm"></datepicker>
+              </div>
+              <div class="col-md-2">
+                <timepicker show-meridian="false" minute-step="1"
+                            data-ng-model="selectedRecord.end_time"></timepicker>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

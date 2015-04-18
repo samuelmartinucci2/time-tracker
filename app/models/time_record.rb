@@ -1,8 +1,11 @@
 class TimeRecord < ActiveRecord::Base
-  validates_presence_of :start_time, :end_time, :user
+  validates_presence_of :start_time, :user
   validate :validate_end_time_before_start_time
+  validates_uniqueness_of :user, conditions: -> { where(:end_time => nil) }
 
   belongs_to :user
+
+  scope :most_recent, -> { order("start_time ASC") }
 
   def validate_end_time_before_start_time
     if end_time && start_time
@@ -10,7 +13,11 @@ class TimeRecord < ActiveRecord::Base
     end
   end
 
-  def title
-    I18n.localize(start_time, format: :short).unless(start_time = end_time).concatenate(" - " + I18n.localize(end_time, format: :short))
+  def self.search(query)
+    if query.present?
+      where(:start_time => query.to_date.beginning_of_day..query.to_date.end_of_day)
+    else
+      all
+    end
   end
 end

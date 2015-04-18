@@ -18,6 +18,7 @@ var app = angular
     'ngTouch',
     'ng-token-auth',
     'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
     'timeTrackerApp.controllers'
   ]);
 

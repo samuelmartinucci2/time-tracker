@@ -132,6 +132,7 @@
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.9.1, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="daemons (v1.2.2, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise (v3.4.1, ruby-2.1.2-p95) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="devise_token_auth (v0.1.31, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="eventmachine (v1.0.5, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="faraday (v0.9.1, ruby-2.1.2-p95) [gem]" level="application" />
@@ -176,6 +177,7 @@
     <orderEntry type="library" scope="PROVIDED" name="sinatra (v1.4.6, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="skinny (v0.2.3, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring (v1.3.4, ruby-2.1.2-p95) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sprockets (v3.0.1, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v2.2.4, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.10, ruby-2.1.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thin (v1.5.1, ruby-2.1.2-p95) [gem]" level="application" />
