@@ -7,8 +7,6 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-gem 'mysql2'
-
 gem 'devise_token_auth'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -35,3 +33,12 @@ gem 'figaro'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+
+group :development, :test do
+  gem 'mysql2'
+end
+
+group :production do
+  gem 'pg'
+end

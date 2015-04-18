@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: time-tracker_production
   username: time-tracker
   password: <%= ENV['TIME-TRACKER_DATABASE_PASSWORD'] %>
