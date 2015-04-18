@@ -14,13 +14,13 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'omniauth-twitter'
 
-gem 'mailcatcher'
 gem 'responders'
 
 gem 'figaro'
 
 group :development, :test do
   gem 'mysql2'
+  gem 'mailcatcher'
 end
 
 group :production do
