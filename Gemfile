@@ -18,6 +18,8 @@ gem 'responders'
 
 gem 'figaro'
 
+gem 'activerecord-session_store'
+
 group :development, :test do
   gem 'mysql2'
   gem 'mailcatcher'
