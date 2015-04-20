@@ -46,6 +46,10 @@ app
         templateUrl: 'views/user_registrations/new.html',
         controller: 'UserRegistrationsCtrl'
       })
+      .when('/reset_password', {
+        templateUrl: 'views/user_registrations/reset.html',
+        controller: 'UserRegistrationsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -70,7 +74,7 @@ app.run(['$rootScope', '$location', '$modal', function($rootScope, $location, $m
   });
 
   $rootScope.$on('auth:login-error', function(ev, data) {
-    showAlert($rootScope, $modal, 'Failure', 'Authentication failure: ' + data.errors[0]);
+    showAlert($rootScope, $modal, 'Failure', 'Authentication failure: ' + data.errors);
   });
 
   $rootScope.$on('auth:logout-success', function(ev) {
@@ -89,6 +93,27 @@ app.run(['$rootScope', '$location', '$modal', function($rootScope, $location, $m
   $rootScope.$on('auth:registration-email-error', function(ev, data) {
     showAlert($rootScope, $modal, 'Failure', 'Registration failure: ' + data.errors[0]);
   });
+
+  $rootScope.$on('auth:email-confirmation-success', function(ev, data) {
+    return $modal({
+      title: "Success!",
+      html: true,
+      content: "<div id='alert-email-confirmation-success'>Welcome " + data.email + ". Your account has been successfully created." + "</div>"
+    });
+  });
+  $rootScope.$on('auth:email-confirmation-error', function(ev, data) {
+    return $modal({
+      title: "Error!",
+      html: true,
+      content: "<div id='alert-email-confirmation-error'>Unable to confirm " + "your account. Request a password reset to verify your identity." + "</div>"
+    });
+  });
+  $rootScope.$on('auth:password-reset-confirm-success', function() {
+    return $modal.open({
+      templateUrl: 'views/user_registrations/password-reset-modal.html',
+      controller: 'UserRegistrationsCtrl'
+    });
+  });
 }]);
 
 
@@ -106,3 +131,4 @@ function showAlert($scope, $modal, title, message) {
     modal.close('');
   }
 }
+

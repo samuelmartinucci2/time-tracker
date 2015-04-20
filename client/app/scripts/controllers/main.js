@@ -56,4 +56,14 @@ angular.module('timeTrackerApp.controllers', ['timeTrackerApp.services'])
         $scope.current_time_record = null;
       });
     }
+
+    $scope.notSameDay = function(date1, date2) {
+      date1 = new Date(date1);
+      date2 = new Date(date2);
+
+      var aDate1 = new Date(date1.getFullYear(),date1.getMonth(),date1.getDate());
+      var aDate2 = new Date(date2.getFullYear(),date2.getMonth(),date2.getDate());
+
+      return aDate2.getTime() > aDate1.getTime()
+    }
   }]);

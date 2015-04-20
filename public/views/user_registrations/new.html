@@ -1,18 +1,27 @@
-<form ng-submit="handleRegBtnClick()" role="form" ng-init="registrationForm = {}">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" ng-model="registrationForm.email" required="required" class="form-control">
+<div class="modal ng-scope top am-fade" tabindex="-1" role="dialog" style="display: block">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" ng-show="title">
+        <button type="button" class="close" ng-click="$hide()">×</button>
+        <h4 class="modal-title ng-binding" ng-bind-html="title">Change your password!</h4></div>
+      <div class="modal-body">
+        <form ng-submit="handleRegBtnClick()" role="form" ng-init="passwordUpdateForm = {}" class="ng-pristine ng-invalid ng-invalid-required">
+          <fieldset ng-disabled="!user.uid">
+            <div class="form-group">
+              <label>password</label>
+              <input type="password" name="password" ng-model="passwordUpdateForm.password" required="required" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+            </div>
+            <div class="form-group">
+              <label>password confirmation</label>
+              <input type="password" name="password_confirmation" ng-model="passwordUpdateForm.password_confirmation" required="required" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required">
+            </div>
+            <div class="pull-right">
+              <button id="reg-submit" type="submit" class="btn btn-primary btn-md">Update password</button>
+              <button ng-click="$hide()" class="btn btn-default btn-md">Cancel</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
   </div>
-
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" ng-model="registrationForm.password" required="required" class="form-control">
-  </div>
-
-  <div class="form-group">
-    <label for="password_confirmation">Password confirmation</label>
-    <input type="password" name="password_confirmation" id="password_confirmation" ng-model="registrationForm.password_confirmation" required="required" class="form-control">
-  </div>
-
-  <button type="submit" class="btn btn-primary btn-lg">Register</button>
-</form>
+</div>

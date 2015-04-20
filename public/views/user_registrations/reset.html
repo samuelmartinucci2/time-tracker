@@ -1,0 +1,16 @@
+<div class="panel-body">
+  <h2>Request Password Reset</h2>
+  <form ng-submit="handleResetBtnClick()" role="form" ng-init="passwordResetForm = {}" class="ng-dirty ng-valid-required ng-valid ng-valid-email ng-submitted">
+    <div class="alert alert-success" role="alert" ng-show="notice">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      {{notice}}
+    </div>
+    <fieldset>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" ng-model="passwordResetForm.email" required="required" class="form-control ng-touched ng-dirty ng-valid-required ng-valid ng-valid-email">
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg">Send password reset email</button>
+    </fieldset>
+  </form>
+</div>
