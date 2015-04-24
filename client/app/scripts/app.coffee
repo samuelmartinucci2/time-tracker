@@ -13,7 +13,7 @@ app = angular.module('timeTrackerApp', [
   'timeTrackerApp.controllers'
 ]);
 
-app.config ($stateProvider, $urlRouterProvider, $locationProvider, $sceProvider, $authProvider, $httpProvider) ->
+app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$sceProvider', '$authProvider', '$httpProvider', ($stateProvider, $urlRouterProvider, $locationProvider, $sceProvider, $authProvider, $httpProvider) ->
   # disable sce
   # TODO: FIX
   $sceProvider.enabled(false)
@@ -40,14 +40,19 @@ app.config ($stateProvider, $urlRouterProvider, $locationProvider, $sceProvider,
     templateUrl: '/views/main.html'
     controller: 'MainCtrl'
     resolve:
-      auth: ($auth) -> return $auth.validateUser()
+      auth: () -> return $authProvider.validateUser()
 
   .state 'null',
     url: ''
     templateUrl: '/views/main.html'
     controller: 'MainCtrl'
     resolve:
-      auth: ($auth) -> return $auth.validateUser()
+      auth: () -> return $authProvider.validateUser()
+
+  $stateProvider
+  .state 'about',
+    url: '/about'
+    templateUrl: '/views/about.html'
 
   .state 'sign_in',
     url: '/sign_in'
@@ -67,8 +72,9 @@ app.config ($stateProvider, $urlRouterProvider, $locationProvider, $sceProvider,
   .state '404',
     url: '/404'
     templateUrl: '/404.html'
+]
 
-app.run ($rootScope, $modal) ->
+app.run ['$rootScope', '$modal', ($rootScope, $modal) ->
     # event listeners
     $rootScope.$on('auth:registration-email-success', (ev, data) ->
       $modal({
@@ -268,4 +274,4 @@ app.run ($rootScope, $modal) ->
           "your account. " + errors + "</div>"
       })
     )
-
+]

@@ -1,10 +1,5 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :null_session
   include DeviseTokenAuth::Concerns::SetUserByToken
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:confirm_success_url, :config_name) }
-  end
 end
