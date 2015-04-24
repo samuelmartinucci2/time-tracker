@@ -1,13 +1,6 @@
 class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
-  include ActionController::MimeResponds
   before_action :configure_permitted_parameters, if: :devise_controller?
-
-  def self.respond_to(*mimes)
-    include ActionController::RespondWith::ClassMethods
-  end
-
-  respond_to :json
 
   protected
 

@@ -57,7 +57,7 @@
           <li><a ng-href="#/">Contact</a></li>
           <li ng-show="!user.signedIn"><a ng-href="#/sign_in">Sign in</a></li>
           <li ng-show="!user.signedIn"><a ng-href="#/sign_up">Sign up</a></li>
-          <li ng-show="user.signedIn"><a ng-click='signOut()'>Sign out</a></li>
+          <li ng-show="user.signedIn"><a ng-href="#/sign_in" ng-click='signOut()'>Sign out</a></li>
         </ul>
       </div>
     </div>
@@ -65,7 +65,7 @@
 </div>
 
 <div class="container">
-  <div ng-view=""></div>
+  <section ui-view></section>
 </div>
 
 
@@ -82,36 +82,38 @@
   ga('send', 'pageview');
 </script>
 
-<!-- build:js({.tmp,app}) scripts/vendor.js -->
-<!-- bower:js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/angular-cookie/angular-cookie.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+<script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
+
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
-<script src="bower_components/moment/moment.js"></script>
 <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
-<!-- endbower -->
-<!-- endbuild -->
+
+<script src="bower_components/angular-strap/dist/angular-strap.js"></script>
+<script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script src="scripts/services/time_record.js"></script>
-
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/about.js"></script>
 <script src="scripts/controllers/user_sessions.js"></script>
 <script src="scripts/controllers/user_registrations.js"></script>
 
-
+<script src="scripts/services/time_record.js"></script>
 <!-- endbuild -->
 </body>
 </html>

@@ -21,7 +21,10 @@
   <tbody ng-repeat="record in timeRecords" ng-click="selectRecord(record)">
   <tr>
     <td>{{record.start_time | date : 'H:mm'}}</td>
-    <td>{{record.end_time | date : 'H:mm'}}</td>
+    <td>
+      {{record.end_time | date : 'H:mm'}}
+      <span class="glyphicon glyphicon-calendar" style="cursor: pointer; color:red" aria-hidden="true" ng-show="notSameDay(record.start_time, record.end_time)" title="{{record.end_time | date : shortDate}}"></span>
+    </td>
     <td>
       <span class="glyphicon glyphicon-blackboard" style="font-size: 1.8em; cursor: pointer" aria-hidden="true" data-toggle="modal" data-target="#descModal"></span>
     </td>
@@ -38,7 +41,7 @@
 <div class="modal fade bs-example-modal-lg" id="descModal" tabindex="-1" role="dialog" aria-labelledby="descModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form" role="form" ng-submit="updateRecord(false)">
+      <form class="form" role="form" ng-submit="updateRecord(true)">
         <div class="modal-body">
           <div class="container-fluid">
             <div class="form-group">

@@ -1,6 +1,6 @@
 <div class="panel-body">
   <h2>Request Password Reset</h2>
-  <form ng-submit="handleResetBtnClick()" role="form" ng-init="passwordResetForm = {}" class="ng-dirty ng-valid-required ng-valid ng-valid-email ng-submitted">
+  <form ng-submit="requestPasswordReset(passwordResetForm)" role="form" ng-init="passwordResetForm = {}" class="ng-dirty ng-valid-required ng-valid ng-valid-email ng-submitted">
     <div class="alert alert-success" role="alert" ng-show="notice">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       {{notice}}

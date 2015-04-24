@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root :to => redirect('/index.html')
-  get "/auth/:provider/callback" => "sessions#create"
   mount_devise_token_auth_for 'User', at: 'api/auth'
+
 
   scope :api do
     get '/time_records/current' => "time_records#current"
