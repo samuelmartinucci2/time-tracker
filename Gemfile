@@ -7,6 +7,7 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
+gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'
 gem 'omniauth-facebook'

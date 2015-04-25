@@ -182,6 +182,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store
+  devise
   devise_token_auth
   figaro
   mailcatcher
