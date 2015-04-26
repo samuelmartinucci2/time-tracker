@@ -14,7 +14,7 @@ app = angular.module('timeTrackerApp', [
 ]);
 
 app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$sceProvider', '$authProvider',
-            '$httpProvider',
+            '$httpProvider'
   ($stateProvider, $urlRouterProvider, $locationProvider, $sceProvider, $authProvider, $httpProvider) ->
     $authProvider.configure([
       default:
@@ -24,14 +24,16 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$scePr
           facebook: '/auth/facebook'
           google: '/auth/google'
           twitter: '/auth/twitter'
-    ])
+    ]);
+
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 
     # disable sce
     # TODO: FIX
-    #  $sceProvider.enabled(false)
+    $sceProvider.enabled(false)
 
     # push-state routes
-    #  $locationProvider.html5Mode(false);
+    $locationProvider.html5Mode(false);
 
     # default to 404 if state not found
     $urlRouterProvider.otherwise('/404');
@@ -42,14 +44,14 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$scePr
       templateUrl: '/views/main.html'
       controller: 'MainCtrl'
       resolve:
-        auth: () -> return $authProvider.validateUser()
+        auth: ['$auth', ($auth) -> return $auth.validateUser()]
 
     .state 'null',
       url: ''
       templateUrl: '/views/main.html'
       controller: 'MainCtrl'
       resolve:
-        auth: () -> return $authProvider.validateUser()
+        auth: ['$auth', ($auth) -> return $auth.validateUser()]
 
     $stateProvider
     .state 'about',
@@ -59,12 +61,24 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$scePr
     .state 'sign_in',
       url: '/sign_in'
       templateUrl: '/views/user_sessions/new.html'
-      controller: 'UserSessionsCtrl'
+      controller: 'UserSessionsCtrl',
+      data: {
+        permissions: {
+          only: ['anonymous'],
+          redirectTo: 'index'
+        }
+      }
 
     .state 'sign_up',
       url: '/sign_up'
       templateUrl: '/views/user_registrations/new.html'
-      controller: 'UserRegistrationsCtrl'
+      controller: 'UserRegistrationsCtrl',
+      data: {
+        permissions: {
+          only: ['anonymous'],
+          redirectTo: 'index'
+        }
+      }
 
     .state 'reset_password',
       url: '/reset_password'
@@ -76,7 +90,7 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$scePr
       templateUrl: '/404.html'
 ]
 
-app.run ['$rootScope', '$modal', ($rootScope, $modal) ->
+app.run ['$rootScope', '$modal', '$state', ($rootScope, $modal, $state) ->
   # event listeners
   $rootScope.$on('auth:registration-email-success', (ev, data) ->
     $modal({
@@ -203,7 +217,12 @@ app.run ['$rootScope', '$modal', ($rootScope, $modal) ->
 
     delete $rootScope.loginForm[field] for field, val of $rootScope.loginForm
     delete $rootScope.registrationForm[field] for field, val of $rootScope.registrationForm
+
+    $state.go('index')
+
   )
+
+  $rootScope.$on('auth:invalid', () -> $state.go('sign_in'))
 
   $rootScope.$on('auth:login-error', (ev, data) ->
     $modal({

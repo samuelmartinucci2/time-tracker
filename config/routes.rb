@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root :to => redirect('/index.html')
+  root to: redirect('index.html')
+  mount_devise_token_auth_for 'User', at: 'auth'
 
   namespace :api, :defaults => { :format => 'json' } do
     scope :v1 do

@@ -1,5 +1,5 @@
-class TimeRecordsController < ApplicationController
-  before_action :set_time_record, only:  :show
+class Api::TimeRecordsController < ApplicationController
+  before_action :set_time_record, only: :show
   before_action :set_users_time_record, only: [:update, :destroy]
   before_action :authenticate_user!
 
@@ -25,7 +25,7 @@ class TimeRecordsController < ApplicationController
     @time_record.user = current_user
 
     if @time_record.save
-      render json: @time_record, status: :created, location: @time_record
+      render json: @time_record, status: :created, location: api_time_record_url(@time_record)
     else
       render json: @time_record.errors, status: :unprocessable_entity
     end
@@ -57,15 +57,15 @@ class TimeRecordsController < ApplicationController
 
   private
 
-    def set_time_record
-      @time_record = TimeRecord.find(params[:id])
-    end
+  def set_time_record
+    @time_record = TimeRecord.find(params[:id])
+  end
 
-    def set_users_time_record
-      @time_records = current_user.time_records.find(params[:id])
-    end
+  def set_users_time_record
+    @time_records = current_user.time_records.find(params[:id])
+  end
 
-    def time_record_params
-      params.permit(:start_time, :end_time, :description)
-    end
+  def time_record_params
+    params.permit(:start_time, :end_time, :description)
+  end
 end
