@@ -1,13 +1,13 @@
 class Api::TimeRecordsController < ApplicationController
   before_action :set_time_record, only: :show
   before_action :set_users_time_record, only: [:update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_api_user!
 
   # GET /time_records
   # GET /time_records.json
   def index
     @search_query = params[:q] ? params[:q] : Time.now
-    @time_records = current_user.time_records.search(@search_query).most_recent
+    @time_records = current_api_user.time_records.search(@search_query).most_recent
 
     render json: @time_records
   end
@@ -22,7 +22,7 @@ class Api::TimeRecordsController < ApplicationController
   # POST /time_records.json
   def create
     @time_record = TimeRecord.new(time_record_params)
-    @time_record.user = current_user
+    @time_record.user = current_api_user
 
     if @time_record.save
       render json: @time_record, status: :created, location: api_time_record_url(@time_record)
@@ -34,7 +34,7 @@ class Api::TimeRecordsController < ApplicationController
   # PATCH/PUT /time_records/1
   # PATCH/PUT /time_records/1.json
   def update
-    @time_record = current_user.time_records.find(params[:id])
+    @time_record = current_api_user.time_records.find(params[:id])
     if @time_record.update(time_record_params)
       head :no_content
     else
@@ -51,7 +51,7 @@ class Api::TimeRecordsController < ApplicationController
   end
 
   def current
-    @time_record = current_user.time_records.where(:end_time => nil).first
+    @time_record = current_api_user.time_records.where(:end_time => nil).first
     render json: @time_record
   end
 
@@ -62,7 +62,7 @@ class Api::TimeRecordsController < ApplicationController
   end
 
   def set_users_time_record
-    @time_records = current_user.time_records.find(params[:id])
+    @time_records = current_api_user.time_records.find(params[:id])
   end
 
   def time_record_params
